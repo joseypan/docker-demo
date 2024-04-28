@@ -24,6 +24,9 @@ COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 # 复制自定义的 Nginx 配置文件（如果有的话）
 # COPY nginx.conf /etc/nginx/nginx.conf
+MAINTAINER cchyi
+RUN sed -i '2c listen 80800;' /etc/nginx/conf.d/default.conf
+RUN sed -i '3c listen [::]:8080;' /etc/nginx/conf.d/default.conf
 
 # 暴露容器的 8080 端口
 EXPOSE 8080
